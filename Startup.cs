@@ -1,7 +1,9 @@
+using FilmesAPI.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -9,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -26,7 +29,10 @@ namespace FilmesAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //var connectionString = Configuration.GetConnectionString("userDB");
+            //services.AddDbContext<FilmeContext>(options => options.UseMySql(connectionString, new MySqlServerVersion(new Version(10, 1, 40)), mySqlOptions => mySqlOptions.CharSetBehavior(CharSetBehavior.NeverAppend)));
 
+            services.AddDbContext<FilmeContext>(opts => opts.UseMySql(Configuration.GetConnectionString("FilmeConnection"), new MySqlServerVersion(new Version(8, 0, 27))));
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
