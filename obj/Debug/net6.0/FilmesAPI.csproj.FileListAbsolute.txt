@@ -36,3 +36,5 @@ C:\github\FilmesAPI\obj\Debug\net6.0\refint\FilmesAPI.dll
 C:\github\FilmesAPI\obj\Debug\net6.0\FilmesAPI.pdb
 C:\github\FilmesAPI\obj\Debug\net6.0\FilmesAPI.genruntimeconfig.cache
 C:\github\FilmesAPI\obj\Debug\net6.0\ref\FilmesAPI.dll
+C:\github\FilmesAPI\bin\Debug\net6.0\AutoMapper.dll
+C:\github\FilmesAPI\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

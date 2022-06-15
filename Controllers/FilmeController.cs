@@ -1,4 +1,6 @@
-﻿using FilmesAPI.Data;
+﻿using AutoMapper;
+using FilmesAPI.Data;
+using FilmesAPI.Data.Dto;
 using FilmesAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -13,24 +15,32 @@ namespace FilmesAPI.Controllers
     public class FilmeController : ControllerBase
     {
         private FilmeContext _context;
+        private IMapper _autoMapper;
 
-        public FilmeController(FilmeContext context)
+        public FilmeController(FilmeContext context, IMapper autoMapper)
         {
             _context = context;
+            _autoMapper = autoMapper;
         }
 
         //private static List<Filme> filmes = new List<Filme>();
         //private static int id = 1;
 
         [HttpPost]
-        public IActionResult AdicionarFilme([FromBody] Filme filme)
+        public IActionResult AdicionarFilme([FromBody] CreateFilmeDto filmeDto)
         {
+            //Utilizando o Dto - sem Mapper
+            //Filme filme = new Filme();
+            //filme.Diretor = filmeDto.Diretor;
+            //filme.Titulo = filmeDto.Titulo;
+            //filme.Duracao = filmeDto.Duracao;
+
+            //Com Mapper
+            Filme filme = _autoMapper.Map<Filme>(filmeDto);
+
             _context.Filmes.Add(filme);
             _context.SaveChanges();
             return CreatedAtAction(nameof(RecuperarFilmesPorId), new { Id = filme.Id }, filme);
-            //filme.Id = id++;
-            //filmes.Add(filme);
-            // return Ok(filme);
         }
 
         [HttpGet]

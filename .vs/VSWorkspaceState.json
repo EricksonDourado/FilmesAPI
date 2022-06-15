@@ -1,6 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Data",
+    "\\Data\\Dto"
   ],
   "SelectedNode": "\\FilmesAPI.sln",
   "PreviewInSolutionExplorer": false
