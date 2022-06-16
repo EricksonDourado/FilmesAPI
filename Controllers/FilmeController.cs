@@ -54,25 +54,24 @@ namespace FilmesAPI.Controllers
         public IActionResult RecuperarFilmesPorId(int id)
         {
             Filme filme = _context.Filmes.FirstOrDefault(filme => filme.Id == id);
-            if (filme != null)
+            if (filme == null)
             {
-                return Ok(filme);
+                return NotFound();
             }
-            return NotFound();
+            ReadFilmeDto filmeDto = _autoMapper.Map<ReadFilmeDto>(filme);
+            return Ok(filmeDto);
+
         }
 
         [HttpPut("{id}")]
-        public IActionResult AtualizaFilme(int id, [FromBody] Filme filmeNovo)
+        public IActionResult AtualizaFilme(int id, [FromBody] UpdateFilmeDto filmeDto)
         {
             Filme filme = _context.Filmes.FirstOrDefault(filme => filme.Id == id);
             if (filme == null)
             {
                 return NotFound();
             }
-            filme.Titulo = filmeNovo.Titulo;
-            filme.Diretor = filmeNovo.Diretor;
-            filme.Genero = filmeNovo.Genero;
-            filme.Duracao = filmeNovo.Duracao;
+            _autoMapper.Map(filmeDto, filme);
             _context.SaveChanges();
             return NoContent();
         }
