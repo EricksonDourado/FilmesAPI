@@ -1,11 +1,9 @@
-﻿
-using AutoMapper;
+﻿using AutoMapper;
 using FilmesAPI.Data.Dto;
 using FilmesAPI.Models;
 
 namespace FilmesAPI.Profiles
 {
-
     public class FilmeProfile : Profile
     {
         public FilmeProfile()
@@ -15,5 +13,4 @@ namespace FilmesAPI.Profiles
             CreateMap<UpdateFilmeDto, Filme>();
         }
     }
-
 }
