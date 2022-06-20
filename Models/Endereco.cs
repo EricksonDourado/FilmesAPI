@@ -11,10 +11,7 @@ namespace FilmesAPI.Models
         public string Logradouro { get; set; }
         [Required(ErrorMessage = "O campo Numero é obrigatório")]
         public int Numero { get; set; }
-        public int Cep { get; set; }
         public string Bairro { get; set; }
-        public string Cidade { get; set; }
-        public string Estado { get; set; }
-
+        public virtual Cinema Cinema { get; set; }
     }
 }
