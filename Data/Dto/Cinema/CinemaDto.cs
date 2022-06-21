@@ -1,5 +1,5 @@
-﻿using FilmesAPI.Models;
-using System;
+﻿
+using FilmesAPI.Models;
 using System.ComponentModel.DataAnnotations;
 
 namespace FilmesAPI.Data.Dto
@@ -19,7 +19,7 @@ namespace FilmesAPI.Data.Dto
         public int Id { get; set; }
         [Required(ErrorMessage = "O campo de nome é obrigatório")]
         public string Nome { get; set; }
-        public object Endereco { get; set; }
+        public Endereco Endereco { get; set; }
         public Gerente Gerente { get; set; }
     }
     public class UpdateCinemaDto

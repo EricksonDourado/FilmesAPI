@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿
+
+using AutoMapper;
 using FilmesAPI.Data;
 using FilmesAPI.Data.Dto;
 using FilmesAPI.Models;
@@ -7,24 +9,19 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace FilmesAPI.Controllers
-
-
 {
     [ApiController]
     [Route("[controller]")]
     public class FilmeController : ControllerBase
     {
-        private FilmeContext _context;
-        private IMapper _autoMapper;
+        private  AppDbContext _context;
+        private  IMapper _mapper;
 
-        public FilmeController(FilmeContext context, IMapper autoMapper)
+        public FilmeController(AppDbContext context, IMapper mapper)
         {
+            _mapper = mapper;
             _context = context;
-            _autoMapper = autoMapper;
         }
-
-        //private static List<Filme> filmes = new List<Filme>();
-        //private static int id = 1;
 
         [HttpPost]
         public IActionResult AdicionarFilme([FromBody] CreateFilmeDto filmeDto)
@@ -36,19 +33,34 @@ namespace FilmesAPI.Controllers
             //filme.Duracao = filmeDto.Duracao;
 
             //Com Mapper
-            Filme filme = _autoMapper.Map<Filme>(filmeDto);
-
+            Filme filme = _mapper.Map<Filme>(filmeDto);
             _context.Filmes.Add(filme);
             _context.SaveChanges();
             return CreatedAtAction(nameof(RecuperarFilmesPorId), new { Id = filme.Id }, filme);
         }
 
         [HttpGet]
-        public IActionResult ListarTodosFilmes()
+        public IActionResult RecuperaFilmes([FromQuery] int? classificacaoEtaria = null)
         {
-            return Ok(_context.Filmes);
-            //return Ok(filmes);
+            List<Filme> filmes;
+            if (classificacaoEtaria == null)
+            {
+                filmes = _context.Filmes.ToList();
+            }
+            else
+            {
+                filmes = _context
+                .Filmes.Where(filme => filme.ClassificacaoEtaria <= classificacaoEtaria).ToList();
+            }
+
+            if (filmes != null)
+            {
+                List<ReadFilmeDto> readDto = _mapper.Map<List<ReadFilmeDto>>(filmes);
+                return Ok(readDto);
+            }
+            return NotFound();
         }
+
 
         [HttpGet("{id}")]
         public IActionResult RecuperarFilmesPorId(int id)
@@ -58,7 +70,7 @@ namespace FilmesAPI.Controllers
             {
                 return NotFound();
             }
-            ReadFilmeDto filmeDto = _autoMapper.Map<ReadFilmeDto>(filme);
+            ReadFilmeDto filmeDto = _mapper.Map<ReadFilmeDto>(filme);
             return Ok(filmeDto);
 
         }
@@ -71,7 +83,7 @@ namespace FilmesAPI.Controllers
             {
                 return NotFound();
             }
-            _autoMapper.Map(filmeDto, filme);
+            _mapper.Map(filmeDto, filme);
             _context.SaveChanges();
             return NoContent();
         }

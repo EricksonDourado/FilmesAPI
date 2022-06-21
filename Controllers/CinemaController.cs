@@ -6,17 +6,17 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace CinemasAPI.Controllers
+namespace FilmesAPI.Controllers
 
 {
     [ApiController]
     [Route("[controller]")]
     public class CinemaController : ControllerBase
     {
-        private FilmeContext _context;
+        private AppDbContext _context;
         private IMapper _autoMapper;
 
-        public CinemaController(FilmeContext context, IMapper autoMapper)
+        public CinemaController(AppDbContext context, IMapper autoMapper)
         {
             _context = context;
             _autoMapper = autoMapper;

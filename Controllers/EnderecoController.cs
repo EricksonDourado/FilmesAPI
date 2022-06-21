@@ -12,79 +12,69 @@ namespace FilmesAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class FilmeController : ControllerBase
+    public class EnderecoController : ControllerBase
     {
-        private FilmeContext _context;
+        private AppDbContext _context;
         private IMapper _autoMapper;
 
-        public FilmeController(FilmeContext context, IMapper autoMapper)
+        public EnderecoController(AppDbContext context, IMapper autoMapper)
         {
             _context = context;
             _autoMapper = autoMapper;
         }
 
-        //private static List<Filme> filmes = new List<Filme>();
-        //private static int id = 1;
-
         [HttpPost]
-        public IActionResult AdicionarFilme([FromBody] CreateFilmeDto filmeDto)
+        public IActionResult AdicionarEndereco([FromBody] CreateEnderecoDto enderecoDto)
         {
-            //Utilizando o Dto - sem Mapper
-            //Filme filme = new Filme();
-            //filme.Diretor = filmeDto.Diretor;
-            //filme.Titulo = filmeDto.Titulo;
-            //filme.Duracao = filmeDto.Duracao;
+            Endereco endereco = _autoMapper.Map<Endereco>(enderecoDto);
 
-            //Com Mapper
-            Filme filme = _autoMapper.Map<Filme>(filmeDto);
-
-            _context.Filmes.Add(filme);
+            _context.Enderecos.Add(endereco);
             _context.SaveChanges();
-            return CreatedAtAction(nameof(RecuperarFilmesPorId), new { Id = filme.Id }, filme);
+            return CreatedAtAction(nameof(RecuperarEnderecosPorId), new { Id = endereco.Id }, endereco);
         }
 
         [HttpGet]
-        public IActionResult ListarTodosFilmes()
+        public IActionResult ListarTodosEnderecos()
         {
-            return Ok(_context.Filmes);
-            //return Ok(filmes);
+            return Ok(_context.Enderecos);
+            //return Ok(Enderecos);
         }
 
         [HttpGet("{id}")]
-        public IActionResult RecuperarFilmesPorId(int id)
+        public IActionResult RecuperarEnderecosPorId(int id)
         {
-            Filme filme = _context.Filmes.FirstOrDefault(filme => filme.Id == id);
-            if (filme == null)
+            Endereco endereco = _context.Enderecos.FirstOrDefault(endereco => endereco.Id == id);
+            if (endereco == null)
             {
                 return NotFound();
             }
-            ReadFilmeDto filmeDto = _autoMapper.Map<ReadFilmeDto>(filme);
-            return Ok(filmeDto);
+            ReadEnderecoDto enderecoDto = _autoMapper.Map<ReadEnderecoDto>(endereco);
+            return Ok(enderecoDto);
 
         }
 
         [HttpPut("{id}")]
-        public IActionResult AtualizaFilme(int id, [FromBody] UpdateFilmeDto filmeDto)
+        public IActionResult AtualizaEndereco(int id, [FromBody] UpdateEnderecoDto enderecoDto)
         {
-            Filme filme = _context.Filmes.FirstOrDefault(filme => filme.Id == id);
-            if (filme == null)
+            Endereco endereco = _context.Enderecos.FirstOrDefault(endereco => endereco.Id == id);
+            if (endereco == null)
             {
                 return NotFound();
             }
-            _autoMapper.Map(filmeDto, filme);
+            _autoMapper.Map(enderecoDto, endereco);
             _context.SaveChanges();
             return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeletarFilme(int id)
+        public IActionResult DeletarEndereco(int id)
         {
-            Filme filme = _context.Filmes.FirstOrDefault(filme => filme.Id == id);
-            if (filme == null)
+            Endereco endereco = _context.Enderecos.FirstOrDefault(endereco => endereco.Id == id);
+            if (endereco == null)
             {
                 return NotFound();
             }
-            _context.Filmes.Remove(filme);
+            _context.Enderecos.Remove(endereco);
             _context.SaveChanges();
             return NoContent();
         }

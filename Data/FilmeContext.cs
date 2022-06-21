@@ -9,6 +9,7 @@ namespace FilmesAPI.Data
         {
 
         }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Endereco>()
@@ -30,14 +31,12 @@ namespace FilmesAPI.Data
                 .HasOne(sessao => sessao.Cinema)
                 .WithMany(cinema => cinema.Sessoes)
                 .HasForeignKey(sessao => sessao.CinemaId);
-
         }
 
         public DbSet<Filme> Filmes { get; set; }
-        public DbSet<Endereco> Enderecos { get; set; }
         public DbSet<Cinema> Cinemas { get; set; }
-        public DbSet<Sessao> Sessoes { get; set; }
+        public DbSet<Endereco> Enderecos { get; set; }
         public DbSet<Gerente> Gerentes { get; set; }
-
+        public DbSet<Sessao> Sessoes { get; set; }
     }
 }

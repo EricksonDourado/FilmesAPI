@@ -24,8 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\Dto\Sessao\" />
-    <Folder Include="Data\Dto\Gerente\" />
     <Folder Include="Migrations\" />
   </ItemGroup>
 
