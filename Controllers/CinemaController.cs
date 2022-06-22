@@ -20,11 +20,11 @@ namespace FilmesAPI.Controllers
         {
             _context = context;
             _autoMapper = autoMapper;
-        }    
+        }
 
         [HttpPost]
         public IActionResult AdicionarCinema([FromBody] CreateCinemaDto cinemaDto)
-        {           
+        {
             Cinema cinema = _autoMapper.Map<Cinema>(cinemaDto);
 
             _context.Cinemas.Add(cinema);
@@ -35,13 +35,13 @@ namespace FilmesAPI.Controllers
         [HttpGet]
         public IActionResult ListarTodosCinemas()
         {
-            return Ok(_context.Cinemas);          
+            return Ok(_context.Cinemas);
         }
 
         [HttpGet("{id}")]
         public IActionResult RecuperarCinemasPorId(int id)
         {
-           Cinema cinema = _context.Cinemas.FirstOrDefault(cinema => cinema.Id == id);
+            Cinema cinema = _context.Cinemas.FirstOrDefault(cinema => cinema.Id == id);
             if (cinema == null)
             {
                 return NotFound();

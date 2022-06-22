@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace FilmesAPI.Models
 {
@@ -11,6 +12,6 @@ namespace FilmesAPI.Models
         public virtual Filme Filme { get; set; }
         public int FilmeId { get; set; }
         public int CinemaId { get; set; }
-        public DataTime HorarioDeEncerramento { get; set; }
+        public DateTime HorarioDeEncerramento { get; set; }
     }
 }

@@ -38,3 +38,16 @@ C:\github\FilmesAPI\obj\Debug\net6.0\FilmesAPI.genruntimeconfig.cache
 C:\github\FilmesAPI\obj\Debug\net6.0\ref\FilmesAPI.dll
 C:\github\FilmesAPI\bin\Debug\net6.0\AutoMapper.dll
 C:\github\FilmesAPI\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\github\FilmesAPI\bin\Debug\net6.0\Microsoft.Azure.Management.Compute.Fluent.dll
+C:\github\FilmesAPI\bin\Debug\net6.0\Microsoft.Azure.Management.Graph.RBAC.Fluent.dll
+C:\github\FilmesAPI\bin\Debug\net6.0\Microsoft.Azure.Management.Msi.Fluent.dll
+C:\github\FilmesAPI\bin\Debug\net6.0\Microsoft.Azure.Management.Network.Fluent.dll
+C:\github\FilmesAPI\bin\Debug\net6.0\Microsoft.Azure.Management.ResourceManager.Fluent.dll
+C:\github\FilmesAPI\bin\Debug\net6.0\Microsoft.Azure.Management.Storage.Fluent.dll
+C:\github\FilmesAPI\bin\Debug\net6.0\Microsoft.IdentityModel.Clients.ActiveDirectory.dll
+C:\github\FilmesAPI\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+C:\github\FilmesAPI\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+C:\github\FilmesAPI\bin\Debug\net6.0\Microsoft.Rest.ClientRuntime.dll
+C:\github\FilmesAPI\bin\Debug\net6.0\Microsoft.Rest.ClientRuntime.Azure.dll
+C:\github\FilmesAPI\bin\Debug\net6.0\Microsoft.Rest.ClientRuntime.Azure.Authentication.dll
+C:\github\FilmesAPI\bin\Debug\net6.0\Newtonsoft.Json.dll

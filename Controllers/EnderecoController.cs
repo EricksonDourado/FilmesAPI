@@ -34,9 +34,9 @@ namespace FilmesAPI.Controllers
         }
 
         [HttpGet]
-        public IActionResult ListarTodosEnderecos()
+        public IEnumerable<Endereco> ListarTodosEnderecos()
         {
-            return Ok(_context.Enderecos);
+            return _context.Enderecos;
             //return Ok(Enderecos);
         }
 

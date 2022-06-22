@@ -32,7 +32,7 @@ namespace FilmesAPI
             //var connectionString = Configuration.GetConnectionString("userDB");
             //services.AddDbContext<FilmeContext>(options => options.UseMySql(connectionString, new MySqlServerVersion(new Version(10, 1, 40)), mySqlOptions => mySqlOptions.CharSetBehavior(CharSetBehavior.NeverAppend)));
 
-            services.AddDbContext<FilmeContext>(opts => opts.UseMySql(Configuration.GetConnectionString("FilmeConnection"), new MySqlServerVersion(new Version(8, 0, 27))));
+            services.AddDbContext<AppDbContext>(opts => opts.UseMySql(Configuration.GetConnectionString("FilmeConnection"), new MySqlServerVersion(new Version(8, 0, 27))));
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
