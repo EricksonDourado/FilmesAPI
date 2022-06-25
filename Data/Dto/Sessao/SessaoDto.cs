@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FilmesAPI.Models;
+using System;
 
 namespace FilmesAPI.Data.Dto
 {
@@ -6,13 +7,13 @@ namespace FilmesAPI.Data.Dto
     {
         public int CinemaId { get; set; }
         public int FilmeId { get; set; }
-        public DateTime  HorarioDeEncerramento { get; set; }
+        public DateTime HorarioDeEncerramento { get; set; }
     }
-
     public class ReadSessaoDto
     {
-        public int CinemaId { get; set; }
-        public int FilmeId { get; set; }
+        public int Id { get; set; }
+        public Cinema Cinema { get; set; }
+        public Filme Filme { get; set; }
         public DateTime HorarioDeEncerramento { get; set; }
         public DateTime HorarioDeInicio { get; set; }
     }

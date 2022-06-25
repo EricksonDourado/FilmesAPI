@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FilmesAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220622015707_Primeira Migration")]
-    partial class PrimeiraMigration
+    [Migration("20220624020905_Criando Migration - Tabelas")]
+    partial class CriandoMigrationTabelas
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -57,7 +57,6 @@ namespace FilmesAPI.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("Logradouro")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<int>("Numero")
@@ -78,15 +77,14 @@ namespace FilmesAPI.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Diretor")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
 
                     b.Property<int>("Duracao")
                         .HasColumnType("int");
 
                     b.Property<string>("Genero")
-                        .HasMaxLength(30)
-                        .HasColumnType("varchar(30)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Titulo")
                         .IsRequired()

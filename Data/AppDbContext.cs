@@ -10,6 +10,7 @@ namespace FilmesAPI.Data
         {
 
         }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Endereco>()
@@ -31,6 +32,7 @@ namespace FilmesAPI.Data
                 .HasOne(sessao => sessao.Cinema)
                 .WithMany(cinema => cinema.Sessoes)
                 .HasForeignKey(sessao => sessao.CinemaId);
+
         }
 
         public DbSet<Filme> Filmes { get; set; }

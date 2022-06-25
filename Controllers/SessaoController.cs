@@ -3,58 +3,44 @@ using FilmesAPI.Data;
 using FilmesAPI.Data.Dto;
 using FilmesAPI.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.Linq;
 
-namespace FilmesAPI.Controllers
 
+namespace FilmesApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
     public class SessaoController : ControllerBase
     {
         private AppDbContext _context;
-        private IMapper _autoMapper;
+        private IMapper _mapper;
 
-        public SessaoController(AppDbContext context, IMapper autoMapper)
+        public SessaoController(AppDbContext context, IMapper mapper)
         {
             _context = context;
-            _autoMapper = autoMapper;
+            _mapper = mapper;
         }
 
         [HttpPost]
-        public IActionResult AdicionarSessao([FromBody] CreateSessaoDto sessaoDto)
+        public IActionResult AdicionaSessao(CreateSessaoDto dto)
         {
-            Sessao sessao = _autoMapper.Map<Sessao>(sessaoDto);
-
+            Sessao sessao = _mapper.Map<Sessao>(dto);
             _context.Sessoes.Add(sessao);
             _context.SaveChanges();
-            return CreatedAtAction(nameof(RecuperarSessoesPorId), new { Id = sessao.Id }, sessao);
+            return CreatedAtAction(nameof(RecuperaSessoesPorId), new { Id = sessao.Id }, sessao);
         }
 
-       [HttpGet("{id}")]
-        public IActionResult RecuperarSessoesPorId(int id)
+        [HttpGet("{id}")]
+        public IActionResult RecuperaSessoesPorId(int id)
         {
             Sessao sessao = _context.Sessoes.FirstOrDefault(sessao => sessao.Id == id);
-            if (sessao == null)
+            if (sessao != null)
             {
-                return NotFound();
-            }
-            ReadSessaoDto sessaoDto = _autoMapper.Map<ReadSessaoDto>(sessao);
-            return Ok(sessaoDto);
-        }
+                ReadSessaoDto sessaoDto = _mapper.Map<ReadSessaoDto>(sessao);
 
-        [HttpDelete("{id}")]
-        public IActionResult DeletarSessao(int id)
-        {
-            Sessao sessao = _context.Sessoes.FirstOrDefault(sessao => sessao.Id == id);
-            if (sessao == null)
-            {
-                return NotFound();
+                return Ok(sessaoDto);
             }
-            _context.Sessoes.Remove(sessao);
-            _context.SaveChanges();
-            return NoContent();
+            return NotFound();
         }
     }
 }

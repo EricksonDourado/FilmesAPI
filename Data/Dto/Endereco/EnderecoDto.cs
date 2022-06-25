@@ -22,10 +22,9 @@ namespace FilmesAPI.Data.Dto
 
     public class UpdateEnderecoDto
     {        
-        public string Logradouro { get; set; }
-        [Required(ErrorMessage = "O campo Numero é obrigatório")]
-        public int Numero { get; set; }
+        public string Logradouro { get; set; }       
         public string Bairro { get; set; }     
+        public int Numero { get; set; }
     }
 }
 
