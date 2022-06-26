@@ -1,19 +1,13 @@
 using FilmesAPI.Data;
+using FilmesAPI.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace FilmesAPI
 {
@@ -35,6 +29,11 @@ namespace FilmesAPI
             services.AddDbContext<AppDbContext>(opts => opts.UseLazyLoadingProxies().UseMySql(Configuration.GetConnectionString("FilmeConnection"), new MySqlServerVersion(new Version(8, 0, 27))));
             services.AddControllers();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddScoped<FilmeService, FilmeService>();
+            services.AddScoped<CinemaService, CinemaService>();
+            services.AddScoped<EnderecoService, EnderecoService>();
+            services.AddScoped<GerenteService, GerenteService>();
+            services.AddScoped<SessaoService, SessaoService>();
 
 
             services.AddSwaggerGen(c =>
