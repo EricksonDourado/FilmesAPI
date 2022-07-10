@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FilmesAPI;
 using FilmesAPI.Data;
 using FilmesAPI.Data.Dto;
 using FilmesAPI.Models;
@@ -12,34 +13,25 @@ namespace FilmesApi.Controllers
     [Route("[controller]")]
     public class SessaoController : ControllerBase
     {
-        private AppDbContext _context;
-        private IMapper _mapper;
-
-        public SessaoController(AppDbContext context, IMapper mapper)
+        SessaoService _context;
+        public SessaoController(SessaoService context)
         {
             _context = context;
-            _mapper = mapper;
         }
 
         [HttpPost]
         public IActionResult AdicionaSessao(CreateSessaoDto dto)
         {
-            Sessao sessao = _mapper.Map<Sessao>(dto);
-            _context.Sessoes.Add(sessao);
-            _context.SaveChanges();
+            ReadSessaoDto sessao = _context.AdicionaSessao(dto);
+
             return CreatedAtAction(nameof(RecuperaSessoesPorId), new { Id = sessao.Id }, sessao);
         }
 
         [HttpGet("{id}")]
         public IActionResult RecuperaSessoesPorId(int id)
         {
-            Sessao sessao = _context.Sessoes.FirstOrDefault(sessao => sessao.Id == id);
-            if (sessao != null)
-            {
-                ReadSessaoDto sessaoDto = _mapper.Map<ReadSessaoDto>(sessao);
-
-                return Ok(sessaoDto);
-            }
+            ReadSessaoDto sessaoDto = _context.RecuperaSessoesPorId(id);
+            if (sessaoDto != null) { return Ok(sessaoDto); }
             return NotFound();
         }
     }
